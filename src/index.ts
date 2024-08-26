@@ -2,15 +2,16 @@
 import { PGlite } from '@electric-sql/pglite';
 import { Knex } from 'knex';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const ClientPG = require('knex/lib/dialects/postgres/index.js');
-
-export default class ClientPGLite extends ClientPG {
+const Client_PG = require('knex/lib/dialects/postgres/index.js');
+class ClientPGLiteImpl extends Client_PG {
     private pglite;
 
     constructor(config: Knex.Config) {
         super(config);
         this.pglite = new PGlite(this.config.filename ?? this.config.connectionString);
     }
+
+    _driver() { }
 
     async _acquireOnlyConnection() {
         const connection = this.pglite;
@@ -91,3 +92,6 @@ export default class ClientPGLite extends ClientPG {
         });
     }
 }
+
+const ClientPGLite = ClientPGLiteImpl as unknown as typeof Knex.Client;
+export default ClientPGLite;
