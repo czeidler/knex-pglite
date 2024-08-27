@@ -7,11 +7,19 @@ class ClientPGLiteImpl extends Client_PG {
     private pglite;
 
     constructor(config: Knex.Config) {
-        super(config);
-        this.pglite = new PGlite(this.config.filename ?? this.config.connectionString);
+        super({
+            ...config,
+            // Enforce a single connection:
+            pool: { min: 1, max: 1 },
+        } satisfies Knex.Config);
+        if (config.pool) {
+            throw new Error('PGlite is single user/connection. Pool cannot be configured.');
+        }
     }
 
-    _driver() { }
+    _driver() {
+        this.pglite = new PGlite(this.config.filename ?? this.config.connectionString);
+    }
 
     async _acquireOnlyConnection() {
         const connection = this.pglite;
