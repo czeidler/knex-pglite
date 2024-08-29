@@ -27,6 +27,11 @@ class ClientPGLiteImpl extends Client_PG {
         return connection;
     }
 
+    async destroyRawConnection(connection: PGlite) {
+        // There is only one connection, if this one goes shut down the database
+        await connection.close()
+    }
+
     async setSchemaSearchPath(connection: PGlite, searchPath: string): Promise<boolean> {
         let path = searchPath || this.searchPath;
 
