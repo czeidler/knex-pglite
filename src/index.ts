@@ -3,10 +3,13 @@ import { PGlite } from '@electric-sql/pglite';
 import { Knex } from 'knex';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const Client_PG = require('knex/lib/dialects/postgres/index.js');
+
+export type KnexPGliteConfig = Knex.Config & { connection: { pglite?: PGlite } };
+
 class ClientPGLiteImpl extends Client_PG {
     private pglite;
 
-    constructor(config: Knex.Config) {
+    constructor(config: KnexPGliteConfig) {
         super({
             ...config,
             // Enforce a single connection:
@@ -18,7 +21,9 @@ class ClientPGLiteImpl extends Client_PG {
     }
 
     _driver() {
-        this.pglite = new PGlite(this.config.filename ?? this.config.connectionString);
+        const config = this.config as KnexPGliteConfig;
+        this.pglite = config.connection?.pglite
+            ?? new PGlite(config.connection?.['filename'] ?? config.connection?.['connectionString']);
     }
 
     async _acquireOnlyConnection() {

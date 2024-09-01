@@ -1,6 +1,6 @@
 {
   "name": "knex-pglite",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "PGlite Dialect for Knex",
   "main": "dist/index.js",
   "scripts": {
