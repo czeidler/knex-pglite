@@ -1,5 +1,7 @@
 # knex-pglite
 
+![NPM Version](https://img.shields.io/npm/v/knex-pglite)
+
 [PGlite](https://pglite.dev/) Dialect for [knex.js](http://knexjs.org)
 
 Since PGlite is single user and only supports a single connection, this library doesn't allow users to configure
