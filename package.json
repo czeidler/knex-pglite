@@ -4,7 +4,8 @@
   "description": "PGlite Dialect for Knex",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest run"
   },
   "author": "Clemens Zeidler",
   "license": "MIT",
@@ -19,10 +20,11 @@
     "eslint": "^8.57.0",
     "globals": "^15.9.0",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
+    "typescript-eslint": "^8.2.0",
+    "vitest": "^2.0.5"
   },
   "dependencies": {
-    "@electric-sql/pglite": "0.2.3",
+    "@electric-sql/pglite": "^0.2.6",
     "knex": "3.1.0"
   }
 }

@@ -1,5 +1,8 @@
 # knex-pglite
 
+![NPM Version](https://img.shields.io/npm/v/knex-pglite)
+[![CI](https://github.com/czeidler/knex-pglite/actions/workflows/ci.yml/badge.svg)](https://github.com/czeidler/knex-pglite/actions/workflows/ci.yml)
+
 [PGlite](https://pglite.dev/) Dialect for [knex.js](http://knexjs.org)
 
 Since PGlite is single user and only supports a single connection, this library doesn't allow users to configure
