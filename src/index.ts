@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PGlite } from '@electric-sql/pglite';
 import { Knex } from 'knex';
+import { PGClient } from './pgclient';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const Client_PG = require('knex/lib/dialects/postgres/index.js');
+const Client_PG: typeof PGClient = require('knex/lib/dialects/postgres/index.js');
 
 export type KnexPGliteConfig = Knex.Config & { connection: { pglite?: PGlite } };
 
-class ClientPGLiteImpl extends Client_PG {
+export default class ClientPGLiteImpl extends Client_PG {
     private pglite;
 
     constructor(config: KnexPGliteConfig) {
@@ -56,7 +57,7 @@ class ClientPGLiteImpl extends Client_PG {
                 const arraySyntax = `[${parts
                     .map((searchPath) => `'${searchPath}'`)
                     .join(', ')}]`;
-                this.logger.warn(
+                this.logger.warn?.(
                     `Detected comma in searchPath "${path}".` +
                     `If you are trying to specify multiple schemas, use Array syntax: ${arraySyntax}`
                 );
@@ -111,5 +112,3 @@ class ClientPGLiteImpl extends Client_PG {
     }
 }
 
-const ClientPGLite = ClientPGLiteImpl as unknown as typeof Knex.Client;
-export default ClientPGLite;
