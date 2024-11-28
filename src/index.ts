@@ -7,7 +7,7 @@ const Client_PG: typeof PGClient = require('knex/lib/dialects/postgres/index.js'
 
 export type KnexPGliteConfig = Knex.Config & { connection: { pglite?: PGlite } };
 
-export default class ClientPGLiteImpl extends Client_PG {
+module.exports = class ClientPGLiteImpl extends Client_PG {
     private pglite;
 
     constructor(config: KnexPGliteConfig) {
