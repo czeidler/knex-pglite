@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PGlite } from '@electric-sql/pglite';
-import { Knex } from 'knex';
+import { Client, Knex } from 'knex';
 import { PGClient } from './pgclient';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const Client_PG: typeof PGClient = require('knex/lib/dialects/postgres/index.js');
 
-export type KnexPGliteConfig = Knex.Config & { connection: { pglite?: PGlite } };
+type KnexPGliteConfig = Knex.Config & { connection: { pglite?: PGlite } };
+
+declare class ClientPGLiteImpl extends Client {
+    constructor(config: KnexPGliteConfig);
+}
+export = ClientPGLiteImpl;
 
 module.exports = class ClientPGLiteImpl extends Client_PG {
     private pglite;

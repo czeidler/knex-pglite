@@ -26,12 +26,12 @@ const instance = knex({
   dialect: "postgres",
   // Use an empty object to use an in memory db
   connection: {},
-  // OR provide own PGLite instance
-  // connection: { pglite: new PGLite() },
   // OR use the filesystem:
   // connection: { filename: 'path/to/my-pgdata' },
   // OR use indexdb:
   // connection: { connectionString: 'idb://my-pgdata' },
+  // OR provide own PGLite instance (experimental; no TypeScript types...)
+  // connection: { pglite: new PGLite() },
 });
 ```
 
