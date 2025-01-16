@@ -1,6 +1,6 @@
 # knex-pglite
 
-![NPM Version](https://img.shields.io/npm/v/knex-pglite)
+[![NPM Version](https://img.shields.io/npm/v/knex-pglite)](https://www.npmjs.com/package/knex-pglite)
 [![CI](https://github.com/czeidler/knex-pglite/actions/workflows/ci.yml/badge.svg)](https://github.com/czeidler/knex-pglite/actions/workflows/ci.yml)
 
 [PGlite](https://pglite.dev/) Dialect for [knex.js](http://knexjs.org)
