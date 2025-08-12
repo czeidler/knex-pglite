@@ -1,11 +1,12 @@
 {
   "name": "knex-pglite",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "PGlite Dialect for Knex",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "publish": "npm run build && npm publish"
   },
   "author": "Clemens Zeidler",
   "license": "MIT",
@@ -23,8 +24,8 @@
     "typescript-eslint": "^8.2.0",
     "vitest": "^2.0.5"
   },
-  "dependencies": {
-    "@electric-sql/pglite": "^0.2.14",
-    "knex": "3.1.0"
+  "peerDependencies": {
+    "@electric-sql/pglite": "0.x",
+    "knex": "3.x"
   }
 }
