@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "publish": "npm run build && npm publish"
   },
   "author": "Clemens Zeidler",
   "license": "MIT",
