@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "npm:publish": "npm run build && npm publish"
+    "prepare": "npm run build"
   },
   "author": "Clemens Zeidler",
   "license": "MIT",
