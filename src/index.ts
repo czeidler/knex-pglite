@@ -94,10 +94,14 @@ class ClientPGLiteImpl extends Client_PG {
   }
 
   processResponse(obj: any, runner: any) {
+    const command = obj.method === 'first' || obj.method === 'pluck' ?
+      'SELECT' :
+      (obj.method as string)?.toUpperCase() ?? '';
+
     const response = {
       ...obj.response,
       rowCount: obj.response.affectedRows,
-      command: (obj.method as string)?.toUpperCase() ?? "",
+      command,
     };
     return super.processResponse({ ...obj, response }, runner);
   }
