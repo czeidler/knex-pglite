@@ -97,7 +97,7 @@ describe("Provide external PGlite instance", () => {
       client: ClientPgLite,
       connection: () => ({ pglite } as object),
     });
-    const result2 = await db("contacts").where("name", "Alice");
-    expect(result2[0]?.name).toBe("Alice");
+    const result = await db("contacts").where("name", "Alice");
+    expect(result[0]?.name).toBe("Alice");
   });
 });
