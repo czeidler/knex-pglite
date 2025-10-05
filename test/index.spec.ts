@@ -1,6 +1,7 @@
 import Knex from "knex";
 import ClientPgLite from "../src/index";
 import { describe, it, expect, beforeAll } from "vitest";
+import { PGlite } from "@electric-sql/pglite";
 
 describe("Basic tests", () => {
   let db: Knex.Knex;
@@ -69,5 +70,34 @@ describe("Basic tests", () => {
     const result = await db("contacts").first().orderBy("name");
     expect(result).toBeTruthy();
     expect(result.name).toBe("Alice");
+  });
+});
+
+describe("Provide external PGlite instance", () => {
+  const pglite = new PGlite();
+
+  beforeAll(async () => {
+    const db = Knex({
+      client: ClientPgLite,
+      connection: () => ({ pglite } as object),
+    });
+    await db.schema.createTable("contacts", (tb) => {
+      tb.increments();
+      tb.string("name").notNullable();
+    });
+    await db("contacts").insert([{ name: "Alice" }]);
+
+    const result = await db("contacts").where("name", "Alice");
+    expect(result[0]?.name).toBe("Alice");
+  });
+
+  it("should be able to use a provide pglite instance", async () => {
+    // reuse same db
+    const db = Knex({
+      client: ClientPgLite,
+      connection: () => ({ pglite } as object),
+    });
+    const result2 = await db("contacts").where("name", "Alice");
+    expect(result2[0]?.name).toBe("Alice");
   });
 });

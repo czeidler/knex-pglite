@@ -31,7 +31,7 @@ const instance = knex({
   // OR use indexdb:
   // connection: { connectionString: 'idb://my-pgdata' },
   // OR provide own PGLite instance (experimental; no TypeScript types...)
-  // connection: { pglite: new PGLite() },
+  // connection: () => ({ pglite: new PGLite() } as object)
 });
 ```
 
