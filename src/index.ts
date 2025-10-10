@@ -5,7 +5,13 @@ import { PGClient } from "./pgclient";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const Client_PG: typeof PGClient = require("knex/lib/dialects/postgres/index.js");
 
-type KnexPGliteConfig = Knex.Config & { connection: { pglite?: PGlite } };
+type KnexPGliteConfigConnection =
+  | (() => { pglite?: PGlite })
+  // deprecated, apparently Knex clones the provided pglite instance if passed as an object:
+  | { pglite?: PGlite };
+type KnexPGliteConfig = Knex.Config & {
+  connection?: KnexPGliteConfigConnection;
+};
 
 class ClientPGLiteImpl extends Client_PG {
   private pglite;
@@ -24,9 +30,21 @@ class ClientPGLiteImpl extends Client_PG {
   }
 
   _driver() {
-    const config = this.config as KnexPGliteConfig;
+    const config = this.config;
+
+    // check for externally provided pglite instance
+    const connection = config.connection as
+      | KnexPGliteConfigConnection
+      | undefined;
+    const pglite =
+      connection === undefined
+        ? undefined
+        : typeof connection === "function"
+        ? connection().pglite
+        : connection?.pglite;
+
     this.pglite =
-      config.connection?.pglite ??
+      pglite ??
       new PGlite(
         config.connection?.["filename"] ??
           config.connection?.["connectionString"]
@@ -94,9 +112,10 @@ class ClientPGLiteImpl extends Client_PG {
   }
 
   processResponse(obj: any, runner: any) {
-    const command = obj.method === 'first' || obj.method === 'pluck' ?
-      'SELECT' :
-      (obj.method as string)?.toUpperCase() ?? '';
+    const command =
+      obj.method === "first" || obj.method === "pluck"
+        ? "SELECT"
+        : (obj.method as string)?.toUpperCase() ?? "";
 
     const response = {
       ...obj.response,
