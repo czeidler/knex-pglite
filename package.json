@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "prepare": "npm run build"
+    "prepare": "pnpm run build"
   },
   "author": "Clemens Zeidler",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "README.md"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
+    "@eslint/js": "9.39.1",
     "@types/emscripten": "1.39.13",
     "@types/node": "^22.5.0",
     "eslint": "9.39.1",
