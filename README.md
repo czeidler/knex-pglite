@@ -37,6 +37,13 @@ const instance = knex({
 
 ## Changelog
 
+### 0.14.0
+
+No functional changes
+
+- Reduce npm pack size by only including release files
+- Switch to pnpm and update dev dependencies
+
 ### 0.13.0
 
 - Add support for Knex `first` and `pluck`
