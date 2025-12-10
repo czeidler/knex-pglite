@@ -35,6 +35,12 @@ const instance = knex({
 });
 ```
 
+## Changelog
+
+### 0.13.0
+
+- Add support for Knex `first` and `pluck`
+
 ## Acknowledgements
 
 Mostly based on the build-in knex Postgres/Sqlite dialects.
