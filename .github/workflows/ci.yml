@@ -10,11 +10,14 @@ jobs:
       matrix:
         version: [22]
     steps:
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.version }}
       - name: Run tests
         run: |
-          npm ci
-          npm run test
+          pnpm i
+          pnpm run test
