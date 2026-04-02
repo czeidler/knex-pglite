@@ -43,10 +43,31 @@ No functional changes
 
 - Reduce npm pack size by only including release files
 - Switch to pnpm and update dev dependencies
+- Add changelog
 
 ### 0.13.0
 
+- Add option to pass PGlite instance through a connection function
+
+### 0.12.1
+
 - Add support for Knex `first` and `pluck`
+
+### 0.10.0
+
+- Add support ESM
+
+### 0.9.8
+
+- Update to PGlite 0.2.14
+
+### 0.9.4
+
+- Enforce single DB connection
+
+### 0.9.1
+
+- Initial version
 
 ## Acknowledgements
 
